@@ -37,10 +37,20 @@ OS: Debian 12.<br>
 ### 2. Key Features: 
 
 **2.1. Auto-Schema, Single-Row Architecture, and Constant-id**<br>
-Upon application startup, the <code>sahar_prototype.data</code> table is automatically created (if it does not exist) to store the entered text. During the save operation, a row is formed in the table, consisting of three columns: <code>id</code> (Primary Key), <code>content</code> (text data), and <code>created_at</code> (timestamp). A constant <code>id</code> of <code>UUID format (11111111-1111-1111-1111-111111111111)</code> is used for the entered text. Instead of creating multiple entries, the system uses the <code>INSERT</code> operation as an <code>"upsert"</code> (updating an existing record). Since the <code>id</code> is always the same, any save operation simply overwrites the data in the content column for this specific row.
+Upon application startup, the <code>sahar_prototype.data</code> table is automatically created (if it does not exist) to store the entered text. During the save operation, a row is formed in the table, consisting of three columns: <code>id</code> (Primary Key), <code>content</code> (text data), and <code>created_at</code> (timestamp). A constant <code>id</code> of <code>UUID format (11111111-1111-1111-1111-111111111111)</code> is used for the entered text. Instead of creating multiple entries, the system uses the <code>INSERT</code> operation as an <code>"upsert"</code> (updating an existing record). Since the <code>id</code> is always the same, any save operation simply overwrites the data in the content column for this specific row:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-1.png"/>
+</p>
+<p align="center"><strong>Screenshot 1: Single Row View</strong></p>
 
 **2.2. Zero-Overhead SSR via Askama**<br>
-Unlike traditional runtime template engines, Askama compiles HTML templates directly into Rust code during the build process. This provides absolute type safety and eliminates runtime parsing overhead, serving fully rendered pages to clients and web crawlers instantly.
+Unlike traditional runtime template engines, Askama compiles HTML templates directly into Rust code during the build process. This provides absolute type safety and eliminates runtime parsing overhead, serving fully rendered pages to clients and web crawlers instantly:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--LARS/refs/heads/main/assets/screenshot-2.png"/>
+</p>
+<p align="center"><strong>Screenshot 2: Server-Side Rendered (SSR). View source code in a browser (Ctrl+U)</strong></p>
 
 **2.3. SPA-like Reactivity with HTMX**<br>
 By leveraging `hx-post` and `hx-target` attributes, the application performs partial HTML swaps instead of full page reloads. The Actix Web backend dynamically detects HTMX requests via the `hx-request` header and responds only with the necessary HTML fragment, drastically reducing payload sizes.
@@ -64,6 +74,11 @@ High-performance asynchronous connection via <code>scylla-rust-driver</code>. Th
 
 **2.7. Informative Server Logging**<br>
 The system outputs informative operation reports to the console:
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-3.webp" width="750" />
+</p>
+<p align="center"><strong>Screenshot 3: ScyllaDB readiness log</strong></p>
 
 <span id="paragraph_3"></span> 
 ### 3. Installation & Setup
