@@ -7,7 +7,7 @@ This prototype allows you to **add**, **display**, **update**, and **delete text
 By utilizing **Askama compile-time templates** and **HTMX**, the application delivers lightning-fast **Server-Side Rendering (SSR)** with seamless partial DOM updates. This guarantees **100% search engine indexing**, flawless **SEO performance**, and maximum resistance to vulnerabilities.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/gif2.gif"/>
+  <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/gif.gif"/>
 </p>
 
 **Contents:**<br>
