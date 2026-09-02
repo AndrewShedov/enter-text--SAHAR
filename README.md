@@ -48,7 +48,7 @@ Upon application startup, the <code>sahar_prototype.data</code> table is automat
 Unlike traditional runtime template engines, Askama compiles HTML templates directly into Rust code during the build process. This provides absolute type safety and eliminates runtime parsing overhead, serving fully rendered pages to clients and web crawlers instantly:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--LARS/refs/heads/main/assets/screenshot-2.png"/>
+  <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-2.png"/>
 </p>
 <p align="center"><strong>Screenshot 2: Server-Side Rendered (SSR). View source code in a browser (Ctrl+U)</strong></p>
 
@@ -122,6 +122,8 @@ sudo apt-get update
 ```bash
 sudo apt-get install -y apt-transport-https curl gnupg
 ```
+
+**3.3.3. Add the official ScyllaDB repository to the system:**
 
 📌 Note: By default, this script automatically registers the repository for the latest stable version of ScyllaDB Open Source. To explicitly install ScyllaDB v2025.4.x used in this prototype, run the command with the version flag:
 
