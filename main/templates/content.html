@@ -1,0 +1,31 @@
+<p class="card-label">Text from ScyllaDB:</p>
+
+<div class="text-wrapper">
+    <h2 class="db-text">{% if is_empty %}Database is empty{% else %}{{ content }}{% endif %}</h2>
+</div>
+
+<hr class="separator" />
+
+<div class="controls">
+
+    <!--  Save/Update text form (works with and without JS) -->
+    <form action="/api/content" method="POST" hx-post="/api/content" hx-target="#content-card" hx-swap="innerHTML"
+        hx-indicator="#content-card">
+
+        <div class="input-row">
+            <input type="text" name="content" placeholder="Enter text..." class="input-field" autocomplete="off"
+                required />
+            <button type="submit" class="btn btn-black">
+                {% if is_empty %}Add{% else %}Update{% endif %}
+            </button>
+        </div>
+    </form>
+
+    <!-- Delete text form (works with and without JS) -->
+    {% if !is_empty %}
+    <form action="/api/content/delete" method="POST" hx-post="/api/content/delete" hx-target="#content-card"
+        hx-swap="innerHTML" hx-indicator="#content-card">
+        <button type="submit" class="btn btn-red">Delete</button>
+    </form>
+    {% endif %}
+</div>

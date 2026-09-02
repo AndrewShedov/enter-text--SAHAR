@@ -1,0 +1,13 @@
+[package]
+name = "enter_text_sahar"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+actix-web = "4.15.0"
+actix-files = "0.7.0"
+scylla = "1.8.0"
+askama = "0.16"
+serde = { version = "1.0.229", features = ["derive"] }
+tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread"] }
+uuid = { version = "1.26.0", features = ["v4"] }
