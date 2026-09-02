@@ -24,7 +24,7 @@ By utilizing **Askama compile-time templates** and **HTMX**, the application del
 [Full code](https://github.com/AndrewShedov/enter-text--SAHAR/tree/main/main) | [Cargo.toml](https://github.com/AndrewShedov/enter-text--SAHAR/blob/main/main/Cargo.toml)<br>
 
 **Structure:** <br>
-**S**cyllaDB v2025.4.0 (driver: v1.8.0).<br>
+**S**cyllaDB v2026.2.6 (driver: v1.8.0).<br>
 **A**ctix Web v4.15.0.<br>
 **H**TMX v2.0.10.<br>
 **A**skama v0.16.<br>
@@ -125,10 +125,10 @@ sudo apt-get install -y apt-transport-https curl gnupg
 
 **3.3.3. Add the official ScyllaDB repository to the system:**
 
-📌 Note: By default, this script automatically registers the repository for the latest stable version of ScyllaDB Open Source. To explicitly install ScyllaDB v2025.4.x used in this prototype, run the command with the version flag:
+📌 Note: By default, this script automatically registers the repository for the latest stable version of ScyllaDB Open Source. To explicitly install ScyllaDB v2026.2.6 used in this prototype, run the command with the version flag:
 
 ```bash
-curl -sSf https://get.scylladb.com/server | sudo bash -s -- --scylla-version 2025.4
+curl -sSf https://get.scylladb.com/server | sudo bash -s -- --scylla-version 2026.2
 ```
 
 **3.3.4. Interactive configuration and ScyllaDB installation:**
