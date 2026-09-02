@@ -76,7 +76,7 @@ High-performance asynchronous connection via <code>scylla-rust-driver</code>. Th
 The system outputs informative operation reports to the console:
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-3.webp" width="750" />
+    <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-3.png" width="750" />
 </p>
 <p align="center"><strong>Screenshot 3: ScyllaDB readiness log</strong></p>
 
