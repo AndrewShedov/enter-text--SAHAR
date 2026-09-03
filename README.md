@@ -200,7 +200,7 @@ After entering the command, the address should be displayed:<br>
 <code>Connected to at 127.0.0.1:9042</code>
 <br>
 <br>
->SAHAR is the Russian word 'САХАР' ([IPA](https://en.wikipedia.org/wiki/Help:IPA/Russian): [ˈsaxər]), meaning 'sugar'.
+>SAHAR is a transliteration of the Russian word 'САХАР' ([IPA](https://en.wikipedia.org/wiki/Help:IPA/Russian): [ˈsaxər]), meaning 'sugar'.
 <br>
 <br>
 
