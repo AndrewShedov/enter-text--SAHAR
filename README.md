@@ -200,7 +200,6 @@ After entering the command, the address should be displayed:<br>
 <code>Connected to at 127.0.0.1:9042</code>
 <br>
 <br>
-<br>
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-4.png" width="450" />
