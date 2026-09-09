@@ -202,7 +202,7 @@ After entering the command, the address should be displayed:<br>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-5.png" width="450" />
+    <img src="https://raw.githubusercontent.com/AndrewShedov/enter-text--SAHAR/refs/heads/main/assets/screenshot-5.png" width="556" />
 </p>
 <p align="center"><strong>SAHAR is a transliteration of the Russian word 'САХАР', meaning 'sugar'</strong></p>
 
