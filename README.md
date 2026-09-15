@@ -67,7 +67,25 @@ Designed strictly according to cybersecurity best practices to prevent unauthori
 * **Anti-Injection:** 100% of database interactions run through ScyllaDB `PreparedStatement`s, completely eliminating the possibility of CQL injections.
 * **Anti-CSRF:** Custom middleware explicitly validates the `Origin` header against `ALLOWED_ORIGIN`, blocking Cross-Site Request Forgery attempts.
 * **DoS Protection:** Payload limits (`FormConfig::limit(4096)`) protect the server from memory exhaustion attacks.
-* **Strict Security Headers:** Native Actix Web middleware enforces `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `X-XSS-Protection`, strict `Content-Security-Policy`, and `HSTS`. 
+* **Bulletproof CSP & Security Headers:** Enforced via Actix Web middleware. A zero-compromise Content Security Policy is achieved by completely eliminating `'unsafe-inline'` for both scripts (`script-src 'self'`) and styles (`style-src 'self'`). To comply with these strict rules, the default inline style injection of HTMX is disabled via meta configuration (`<meta name="htmx-config" content='{"includeIndicatorStyles": false}'>`), successfully mitigating all vectors for XSS and CSS injection (UI Redressing):
+
+```rust
+// Strict Security Headers (Zero 'unsafe-inline' tolerance)
+.wrap(
+    middleware::DefaultHeaders::new()
+        .add(("X-Frame-Options", "DENY"))
+        .add(("X-Content-Type-Options", "nosniff"))
+        .add((
+            "Content-Security-Policy",
+            "default-src 'self'; script-src 'self'; style-src 'self';",
+        ))
+        .add((
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+        ))
+        .add(("Referrer-Policy", "strict-origin-when-cross-origin")),
+) 
+```
 
 **2.6. Asynchronous ScyllaDB Integration**<br>
 High-performance asynchronous connection via <code>scylla-rust-driver</code>. Thanks to the use of a shared <code>Arc&lt;Session&gt;</code> and pre-compiled statements loaded at startup, the server can handle thousands of concurrent requests without blocking CPU threads.

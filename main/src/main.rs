@@ -209,12 +209,11 @@ async fn main() -> std::io::Result<()> {
             .app_data(app_state.clone())
             // Limiting incoming data (DoS protection)
             .app_data(web::FormConfig::default().limit(4096))
-            // Basic Security Headers
+            // Strict Security Headers (Zero 'unsafe-inline' tolerance)
             .wrap(
                 middleware::DefaultHeaders::new()
                     .add(("X-Frame-Options", "DENY"))
                     .add(("X-Content-Type-Options", "nosniff"))
-                    .add(("X-XSS-Protection", "1; mode=block"))
                     .add((
                         "Content-Security-Policy",
                         "default-src 'self'; script-src 'self'; style-src 'self';",
