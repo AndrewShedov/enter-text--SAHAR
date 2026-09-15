@@ -55,12 +55,16 @@ fn validate_origin(req: &HttpRequest) -> Result<(), Error> {
 // --- Routes ---
 async fn index(state: web::Data<AppState>) -> Result<HttpResponse, Error> {
     let id = Uuid::parse_str(PROTO_ID).map_err(error::ErrorInternalServerError)?;
-    
+
     let mut content = "Database is empty".to_string();
     let mut is_empty = true;
 
     // Using execute_unpaged for prepared queries
-    if let Ok(res) = state.session.execute_unpaged(&state.stmt_select, (id,)).await {
+    if let Ok(res) = state
+        .session
+        .execute_unpaged(&state.stmt_select, (id,))
+        .await
+    {
         if let Ok(rows) = res.into_rows_result() {
             if let Ok(Some(row)) = rows.maybe_first_row::<(String,)>() {
                 content = row.0;
@@ -91,7 +95,8 @@ async fn save_content(
 
     if !new_content.is_empty() {
         // Parameterized query (injection protection via PreparedStatement)
-        state.session
+        state
+            .session
             .execute_unpaged(&state.stmt_insert, (id, new_content.to_string()))
             .await
             .map_err(error::ErrorInternalServerError)?;
@@ -108,7 +113,9 @@ async fn save_content(
         Ok(HttpResponse::Ok().content_type("text/html").body(body))
     } else {
         // Backup Plan: Redirect to the homepage for a complete refresh
-        Ok(HttpResponse::SeeOther().insert_header(("Location", "/")).finish())
+        Ok(HttpResponse::SeeOther()
+            .insert_header(("Location", "/"))
+            .finish())
     }
 }
 
@@ -123,8 +130,9 @@ async fn delete_content(
     // /ARTIFICIAL 2-SECOND DELAY WHEN DELETING TEXT
 
     let id = Uuid::parse_str(PROTO_ID).map_err(error::ErrorInternalServerError)?;
-    
-    state.session
+
+    state
+        .session
         .execute_unpaged(&state.stmt_delete, (id,))
         .await
         .map_err(error::ErrorInternalServerError)?;
@@ -139,7 +147,9 @@ async fn delete_content(
         Ok(HttpResponse::Ok().content_type("text/html").body(body))
     } else {
         // Backup Plan: Redirect to the homepage for a complete refresh
-        Ok(HttpResponse::SeeOther().insert_header(("Location", "/")).finish())
+        Ok(HttpResponse::SeeOther()
+            .insert_header(("Location", "/"))
+            .finish())
     }
 }
 
@@ -198,15 +208,21 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .app_data(app_state.clone())
             // Limiting incoming data (DoS protection)
-            .app_data(web::FormConfig::default().limit(4096)) 
+            .app_data(web::FormConfig::default().limit(4096))
             // Basic Security Headers
             .wrap(
                 middleware::DefaultHeaders::new()
                     .add(("X-Frame-Options", "DENY"))
                     .add(("X-Content-Type-Options", "nosniff"))
                     .add(("X-XSS-Protection", "1; mode=block"))
-                    .add(("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"))
-                    .add(("Strict-Transport-Security", "max-age=31536000; includeSubDomains"))
+                    .add((
+                        "Content-Security-Policy",
+                        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';",
+                    ))
+                    .add((
+                        "Strict-Transport-Security",
+                        "max-age=31536000; includeSubDomains",
+                    ))
                     .add(("Referrer-Policy", "strict-origin-when-cross-origin")),
             )
             .service(Files::new("/static", "./static"))
