@@ -217,7 +217,7 @@ async fn main() -> std::io::Result<()> {
                     .add(("X-XSS-Protection", "1; mode=block"))
                     .add((
                         "Content-Security-Policy",
-                        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';",
+                        "default-src 'self'; script-src 'self'; style-src 'self';",
                     ))
                     .add((
                         "Strict-Transport-Security",

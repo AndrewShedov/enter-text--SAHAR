@@ -13,6 +13,21 @@ ol {
 
 /* /Reset css */
 
+/* Base styles for HTMX loading indicators */
+.htmx-indicator {
+	display: none;
+}
+
+.htmx-request .htmx-indicator {
+	display: inline;
+}
+
+.htmx-request.htmx-indicator {
+	display: inline;
+}
+
+/* /Base styles for HTMX loading indicators */
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: center;
