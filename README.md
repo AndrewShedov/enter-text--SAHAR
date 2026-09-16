@@ -67,7 +67,7 @@ Designed strictly according to cybersecurity best practices to prevent unauthori
 * **Anti-Injection:** 100% of database interactions run through ScyllaDB `PreparedStatement`s, completely eliminating the possibility of CQL injections.
 * **Anti-CSRF:** Custom middleware explicitly validates the `Origin` header against `ALLOWED_ORIGIN`, blocking Cross-Site Request Forgery attempts.
 * **DoS Protection:** Payload limits (`FormConfig::limit(4096)`) protect the server from memory exhaustion attacks.
-* **Bulletproof CSP & Security Headers:** Enforced via Actix Web middleware. A zero-compromise Content Security Policy is achieved by completely eliminating `'unsafe-inline'` for both scripts (`script-src 'self'`) and styles (`style-src 'self'`). To comply with these strict rules, the default inline style injection of HTMX is disabled via meta configuration (`<meta name="htmx-config" content='{"includeIndicatorStyles": false}'>`), successfully mitigating all vectors for XSS and CSS injection (UI Redressing):
+* **Bulletproof CSP & Security Headers:** Enforced via Actix Web middleware. A zero-compromise Content Security Policy is achieved by completely eliminating `'unsafe-inline'` for both scripts (`script-src 'self'`) and styles (`style-src 'self'`). Because there are no inline scripts, the need for dynamic server-side `nonce` generation is entirely eliminated, drastically reducing server computational overhead. To comply with these strict rules, the default inline style injection of HTMX is disabled via meta configuration (`<meta name="htmx-config" content='{"includeIndicatorStyles": false}'>`), successfully mitigating all vectors for XSS and CSS injection (UI Redressing):
 
 ```rust
 // Strict Security Headers (Zero 'unsafe-inline' tolerance)
