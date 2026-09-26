@@ -26,7 +26,7 @@ By utilizing **Askama compile-time templates** and **HTMX**, the application del
 **Structure:** <br>
 **S**cyllaDB v2026.2.6 (driver: v1.8.0).<br>
 **A**ctix Web v4.15.0.<br>
-**H**TMX v2.0.10.<br>
+**H**TMX v4.0.0.<br>
 **A**skama v0.16.<br>
 **R**ust v1.98.0.<br>
 
@@ -70,21 +70,27 @@ Designed strictly according to cybersecurity best practices to prevent unauthori
 * **Bulletproof CSP & Security Headers:** Enforced via Actix Web middleware. A zero-compromise Content Security Policy is achieved by completely eliminating `'unsafe-inline'` for both scripts (`script-src 'self'`) and styles (`style-src 'self'`). Because there are no inline scripts, the need for dynamic server-side `nonce` generation is entirely eliminated, drastically reducing server computational overhead. To comply with these strict rules, the default inline style injection of HTMX is disabled via meta configuration (`<meta name="htmx-config" content='{"includeIndicatorStyles": false}'>`), successfully mitigating all vectors for XSS and CSS injection (UI Redressing):
 
 ```rust
-// Strict Security Headers (Zero 'unsafe-inline' tolerance)
-.wrap(
-    middleware::DefaultHeaders::new()
-        .add(("X-Frame-Options", "DENY"))
-        .add(("X-Content-Type-Options", "nosniff"))
-        .add((
-            "Content-Security-Policy",
-            "default-src 'self'; script-src 'self'; style-src 'self';",
-        ))
-        .add((
-            "Strict-Transport-Security",
-            "max-age=31536000; includeSubDomains",
-        ))
-        .add(("Referrer-Policy", "strict-origin-when-cross-origin")),
-) 
+.app_data(app_state.clone())
+            // Incoming data limit (Protection against DoS attacks via huge payloads)
+            .app_data(web::FormConfig::default().limit(4096))
+            // Strict security headers (Zero 'unsafe-inline' tolerance)
+            .wrap(
+                middleware::DefaultHeaders::new()
+                    // Protection against Clickjacking
+                    .add(("X-Frame-Options", "DENY"))
+                    // Protection against MIME-sniffing
+                    .add(("X-Content-Type-Options", "nosniff"))
+                    .add((
+                        "Content-Security-Policy",
+                        // Disable inline scripts and styles. Allow own Origin ('self') only
+                        "default-src 'self'; script-src 'self'; style-src 'self';",
+                    ))
+                    .add((
+                        "Strict-Transport-Security",
+                        "max-age=31536000; includeSubDomains; preload",
+                    ))
+                    .add(("Referrer-Policy", "strict-origin-when-cross-origin")),
+            ) 
 ```
 
 **2.6. Asynchronous ScyllaDB Integration**<br>
