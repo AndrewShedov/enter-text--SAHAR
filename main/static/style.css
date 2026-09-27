@@ -121,18 +121,25 @@ body {
 	display: none;
 }
 
-/* 1. Hide only the H2 from the database, but leave the .text-wrapper div */
+/* 1. Hide only the H2 from the database, but keep its physical space to prevent layout shifts */
 #content-card.htmx-request .text-wrapper h2 {
-	display: none;
+	visibility: hidden;
 }
 
-/* 2. Showing the loader */
+/* 2. Showing the loader perfectly centered over the hidden text */
+#content-card.htmx-request .text-wrapper {
+	position: relative;
+}
+
 #content-card.htmx-request .text-wrapper::after {
 	content: "Loading ⏳";
-	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	color: #000000;
 	font-size: 19px;
-	margin: 15px 0;
+	margin: 0;
 	font-weight: normal;
 
 	/* 150ms delay */
@@ -147,6 +154,11 @@ body {
 	}
 }
 
+/* 3. Preventing button double-clicks */
+#content-card.htmx-request .btn {
+	cursor: not-allowed;
+	pointer-events: none;
+}
 /* --- /Loading indicator --- */
 
 
