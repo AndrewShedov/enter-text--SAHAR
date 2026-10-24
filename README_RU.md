@@ -25,17 +25,17 @@
 <span id="paragraph_1"></span> 
 ### 1. Структура проекта и характеристики локального ПК 
 
-**Composition:** <br>
+**Строение:** <br>
 [Full code](https://github.com/AndrewShedov/enter-text--SAHAR/tree/main/main) | [Cargo.toml](https://github.com/AndrewShedov/enter-text--SAHAR/blob/main/main/Cargo.toml)<br>
 
-**Structure:** <br>
+**Структура:** <br>
 **S**cyllaDB v2026.2.6 (драйвер: v1.8.0).<br>
 **A**ctix Web v4.15.0.<br>
 **H**TMX v4.0.0.<br>
 **A**skama v0.16.<br>
 **R**ust v1.98.0.<br>
 
-**Local PC Specifications:** <br>
+**Характеристики локального ПК:** <br>
 ОС: Debian 12.<br>
 
 <span id="paragraph_2"></span> 
