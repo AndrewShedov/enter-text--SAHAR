@@ -7,7 +7,7 @@
 > **Research Article:** <br>
 >  [💎 CRYSTAL Developer’s Diary #3: A Comparative Study of Performance and Cybersecurity of Client-Server Interaction in the LARS and SAHAR Technology Stacks](https://shedov.top/crystal-dev-diary-3-comparative-study-lars-and-sahar/)
 
-This application is a prototype developed as part of the search for a new technology stack for CRYSTAL v3.0.<br>
+This application is a prototype developed as part of the search for a new technology stack for [CRYSTAL v3.0](https://github.com/CrystalSystems).<br>
 This prototype allows you to **add**, **display**, **update**, and **delete text**, demonstrating a full **CRUD** operation cycle with the ScyllaDB database.<br>
 By utilizing **Askama compile-time templates** and **HTMX**, the application delivers lightning-fast **Server-Side Rendering (SSR)** with seamless partial DOM updates. This guarantees **100% search engine indexing**, flawless **SEO performance**, and maximum resistance to vulnerabilities.
 
